@@ -1,0 +1,17 @@
+{
+  "name": "codes",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "tsc && jest --no-cache --verbose ./dist",
+    "coverage": "tsc && jest --no-cache --coverage./dist"
+  },
+  "dependencies": {
+    "jest": "^27.4.7"
+  },
+  "devDependencies": {
+    "typescript": "^4.5.5",
+    "@types/jest": "^27.4.0"
+  }
+}
