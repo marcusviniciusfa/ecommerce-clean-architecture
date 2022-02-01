@@ -1,4 +1,6 @@
 import Coupon from "../src/coupon";
+import DefaultFreightCalculator from "../src/default-freight-calculate";
+import FixedFreightCalculator from "../src/fixed-freight-calculator";
 import Item from "../src/item";
 import Order from "../src/order";
 
@@ -20,7 +22,8 @@ test("Deve criar um pedido com 3 itens", function () {
   order.addItem(new Item(1, "Música", "CD", 30), 3);
   order.addItem(new Item(2, "Vídeo", "DVD", 50), 1);
   order.addItem(new Item(2, "Vídeo", "VHS", 10), 2);
-  expect(order.getTotal()).toBe(30 * 3 + 50 + 10 * 2);
+  const total = 30 * 3 + 50 + 10 * 2;
+  expect(order.getTotal()).toBe(total);
 });
 
 test("Deve criar um pedido com 3 itens com um cupom de desconto", function () {
@@ -32,4 +35,35 @@ test("Deve criar um pedido com 3 itens com um cupom de desconto", function () {
   order.addCoupon(new Coupon("VALE20", 20));
   const total = 30 * 3 + 50 + 10 * 2;
   expect(order.getTotal()).toBe(total - total * 0.2);
+});
+
+test("Deve criar um pedido com um cupom de desconto expirado", function () {
+  const cpf = "839.435.452-10";
+  const order = new Order(cpf);
+  order.addItem(new Item(1, "Música", "CD", 30), 3);
+  order.addItem(new Item(2, "Vídeo", "DVD", 50), 1);
+  order.addItem(new Item(2, "Vídeo", "VHS", 10), 2);
+  order.addCoupon(new Coupon("VALE20", 20, new Date("2022-01-30")));
+  const total = 30 * 3 + 50 + 10 * 2;
+  expect(order.getTotal()).toBe(total);
+});
+
+test("Deve criar um pedido com 3 itens com o cálculo do frete com a estratégia default", function () {
+  const cpf = "839.435.452-10";
+  const order = new Order(cpf, new Date(), new DefaultFreightCalculator());
+  order.addItem(new Item(4, "Instrumentos Musicais", "Guitarra", 1000, 100, 30, 10, 3), 1);
+  order.addItem(new Item(5, "Instrumentos Musicais", "Amplificador", 5000, 100, 50, 50, 20), 1);
+  order.addItem(new Item(6, "Acessórios", "Cabo", 10, 10, 10, 10, 0.9), 3);
+  const freight = 260;
+  expect(order.getFreight()).toBe(freight);
+});
+
+test("Deve criar um pedido com 3 itens com o cálculo do frete com a estratégia do valor fixo", function () {
+  const cpf = "839.435.452-10";
+  const order = new Order(cpf, new Date(), new FixedFreightCalculator());
+  order.addItem(new Item(4, "Instrumentos Musicais", "Guitarra", 1000, 100, 30, 10, 3), 1);
+  order.addItem(new Item(5, "Instrumentos Musicais", "Amplificador", 5000, 100, 50, 50, 20), 1);
+  order.addItem(new Item(6, "Acessórios", "Cabo", 10, 10, 10, 10, 0.9), 3);
+  const freight = 50;
+  expect(order.getFreight()).toBe(freight);
 });
