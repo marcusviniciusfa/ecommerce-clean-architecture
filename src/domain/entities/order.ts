@@ -34,12 +34,12 @@ export default class Order {
   getTotal() {
     let total = 0;
     for (const orderItem of this.orderItems) {
-      total += orderItem.getTotal();
+      total += orderItem.getTotal()
     }
     if (this.coupon) {
       total -= this.coupon.calculateDiscount(total, this.date);
     }
-    return total;
+    return total + this.getFreight();
   }
 
   getFreight() {

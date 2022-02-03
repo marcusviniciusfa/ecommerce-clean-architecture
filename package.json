@@ -4,8 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "test": "tsc && jest --no-cache --verbose ./dist",
-    "coverage": "tsc && jest --no-cache --coverage./dist"
+    "test": "rm -rf ./dist && tsc && jest --no-cache --verbose ./dist",
+    "coverage": "rm -rf ./dist && tsc && jest --no-cache --coverage./dist"
   },
   "dependencies": {
     "jest": "^27.4.7"

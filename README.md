@@ -12,7 +12,7 @@ Um sistema de vendas online com a possibilidade de realizar pedidos com múltipl
 
 #### Parte 2
 
-Para o cálculo do frete considerar a [Fórmula de Cálculo do Frete](fórmula-de-cálculo-do-frete)
+Para o cálculo do frete considerar a [Fórmula de Cálculo do Frete](#Fórmula-de-Cálculo-do-Frete)
 
 - [x] Não deve aplicar cupom de desconto expirado
 - [x] Deve calcular o valor do frete com base nas dimensões (altura, largura e profundidade em cm) e o peso dos produtos (em kg)
@@ -20,13 +20,13 @@ Para o cálculo do frete considerar a [Fórmula de Cálculo do Frete](fórmula-d
 
 #### Fórmula de Cálculo do Frete
 
-Preço do Frete(R$) = distância(km) \* volume(m3) \* (densidade(kg/m3)/100)
-
-Considerando a compra
+Considerando a compra de:
 
 - 1x Guitarra
 - 1x Amplificador
 - 3x Cabos
+
+E preço do frete = distância(km) \* volume(m3) \* (densidade(kg/m3)/100)
 
 ##### Exemplos de volume ocupado (cubagem)
 
@@ -66,3 +66,5 @@ Densidade(kg/m3) = peso(kg) / volume(m3)
   - volume: 0,001
   - densidade: 900
   - preço: (1000 \* 0,001 \* (900 / 100)) = R$9,00 = R$10,00(frete mínimo) \* 3(quantidade de cabos) = R$30,00
+
+  Frete = R$260,00

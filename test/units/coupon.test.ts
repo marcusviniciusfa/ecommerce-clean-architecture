@@ -1,4 +1,4 @@
-import Coupon from "../src/coupon";
+import Coupon from "../../src/domain/entities/coupon";
 
 test("Deve criar um cupom de desconto válido", function () {
   const coupon = new Coupon("VALE20", 20, new Date("2022-01-31"));
